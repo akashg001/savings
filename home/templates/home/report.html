@@ -1,0 +1,61 @@
+{%extends 'home/main.html'%}
+{%load static%}
+{% block content %}
+<div class="main-body">
+                <div class="headtittle">
+                    <form action="/search/" method="get">
+                        <strong>From :</strong> <input type="date" name="fromdate" required/>
+                           <strong>To :</strong> <input type="date" name="todate" required/>
+                           {% csrf_token %}
+                           <input type="submit" value="search"/>
+                           <strong><a href="{% url 'reports'  %}" class="btn btn-success" role="button" aria-pressed="true" style="height:32px;width:100px">Search all</a></strong>                    
+                    </form>
+                        </div>
+       <br>
+       <div class="cards">
+        <div class="row row-2">
+            
+             <div class="col">
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="5">
+                        <thead>
+                            <tr>
+                                <th><strong>What you added</strong></th>
+                                <th><strong>Amount</strong></th>
+                                <th><strong>Category</strong></th>
+                                <th><strong>Date</strong></th>
+                                <th><strong></strong></th>
+                                <th><strong></strong></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {%for info in addmoney%}
+                            <tr>
+                                <td>{{info.add_money}}</td>
+                                <td>{{info.quantity}}</td>
+                                <td>{{info.Category}}</td>
+                                <td>{{info.Date}}</td>
+                            </tr>
+                            {%endfor%}
+                        </tbody>
+                    </table>
+                 </div>
+                 Showing page {{page_obj.number}} of {{page_obj.paginator.num_pages}}
+
+                        <ul class="pagination align-right float-right mr-auto">
+                            {% if page_obj.has_previous %}
+                            <li {% if page_obj.number == 1%} class="page-item active" {% endif %}>
+                            <button ><a class="page-link" href="?page=1" tabindex="-1">&laquo; first </a></button>
+                
+                                <button ><a class="page-link" href="?page={{ page_obj.previous_page_number }}">Previous </a></button>
+                            {% endif%}
+                                {% if page_obj.has_next %}
+                                <button ><a class="page-link" href="?page={{ page_obj.next_page_number }}">Next </a></button>
+                                    <button ><a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a></button>
+                            {% endif %}
+                            </li>
+                        </ul>
+            </div>
+        </div>
+    
+
+{%endblock content%}

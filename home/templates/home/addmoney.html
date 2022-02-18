@@ -1,0 +1,34 @@
+{% extends 'home/main.html'%}
+{%load static%}
+{%block content%}
+<head>
+  <link rel="stylesheet" href="{%static "css/profile.css"%}"> 
+</head>
+<body>
+  <form method="post" action="/addmoney_submission/">
+    {% csrf_token %}
+    <div class="feedback-input"> 
+    <select name="add_money" id="add_money" class="feedback-input" required>
+
+      <option value="Expense">Expense</option>
+      <option value="Income">Income</option>
+  
+    </select>
+    
+  
+    <input name= "quantity" type="quantity" class="feedback-input" placeholder=" Amount " required>   
+    <input name="Date" type="date" class="feedback-input" placeholder="Date" required/>   
+    <select name="Category" id="Category" class="feedback-input" required>
+      <option value="Food">Food</option>
+      <option value="Shopping">Shopping</option>
+      <option value="Travel">Travel</option>
+      <option value="Necessity">Necessity</option>
+      <option value="Entertainment">Entertainment</option>
+      <option value="Others">Others</option>
+    </select>
+    <input type="submit" value="SUBMIT"/>
+  </form>
+</body>
+
+  
+{% endblock content %}

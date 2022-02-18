@@ -1,0 +1,50 @@
+
+{% extends 'home/main.html'%}
+{%block content%}
+{%load static %}
+<div class="main-body">
+    <div class="headtittle">
+        <form>
+            <button><a href="{% url 'date_stats'  %}" >Last 7 Days</a></button> 
+            <button><a href="{% url 'month_stats'  %}" >Last 30 Days</a></button>  
+            <button><a href="{% url 'half_year_stats'  %}" >Last 6 Months</a></button> 
+            <button><a href="{% url 'year_stats'  %}" >Last 1 Year</a></button>
+        </form>
+            </div>
+    <div class="cards">
+        <div class="row row-2">
+            <div class="chart-container" style="position: relative; height:130vh; width:130vh">
+             <div class="col">
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="5">    
+                        <thead>
+                            <tr>
+                                <th>Expenses</th>
+                                <th>Income</th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <canvas id="year_myChart"></canvas>
+                                </td>
+                                <td>
+                                    <canvas id="year_inc_stats"></canvas>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                 </div>
+             </div>
+            </div>
+            </div>
+        </div>
+    
+<script src="{% static 'javascripts/year_stats.js' %}"></script>
+<script src="{% static 'javascripts/year_inc_stats.js' %}"></script>
+
+{% endblock content %}

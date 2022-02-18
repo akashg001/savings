@@ -1,0 +1,90 @@
+{%extends 'home/main.html'%}
+{%load static%}
+<head>
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp"
+        rel="stylesheet">
+</head>
+{%block content%}
+            <div class="main-body">
+                <div class="headtittle">
+                    <span class="greeeting">{{user.first_name}}</span>
+                    <h2>Overview</h2>
+                    <a href="/addmoney"><i class="fa fa-plus-square" style="font-size:48px;color:green"></i></a>
+                    <strong style="font-size:20px">Add Expense/Income</strong>
+                </div>
+
+                <div class="cards">
+                   <div class="row row-1">
+                       
+                        <div class="col">
+                            <div class="balance-card">
+                                <h3 class="cardtittle">Expense</h3>
+                                <h2 class="balance"><i class="fa fa-inr" style="font-size:24px"></i> {{money.exp}}</h2>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="balance-card">
+                                <h3 class="cardtittle">Income</h3>
+                                <h2 class="balance"><i class="fa fa-inr" style="font-size:24px"></i> {{money.inc}}</h2>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="balance-card">
+                                <h3 class="cardtittle">Balance</h3>
+                                <h2 class="balance"><i class="fa fa-inr" style="font-size:24px"></i> {{money.bal}}</h2>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row row-2">
+
+                        <div class="col">
+                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                <thead>
+                                    <tr>
+                                        <th>What you added</th>
+                                        <th>Amount</th>
+                                        <th>Category</th>
+                                        <th>Date</th>
+                                        <th></th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for info in page_obj %} {% comment %} {% for info in add_info %} {% endcomment %}
+                                    <tr>
+                                        <td>{{info.add_money}}</td>
+                                        <td>{{info.quantity}}</td>
+                                        <td>{{info.Category}}</td>
+                                        <td>{{info.Date}}</td>
+                                        <td><a href="{% url 'expense_edit' info.id %}" class=" btn btn-success "><i class="fa fa-edit" style="font-size:24px;color:green"></i></a></td>
+                                        <td><a href="{% url 'expense_delete' info.id %}" class=" btn btn-danger "><i class="fa fa-close" style="font-size:24px;color:red"></i></a></td>
+                                    </tr>
+
+                                    {% endfor %}
+
+                                </tbody>
+                            </table>
+
+                        </div>
+                        Showing page {{page_obj.number}} of {{page_obj.paginator.num_pages}}
+
+                        <ul class="pagination align-right float-right mr-auto">
+                            {% if page_obj.has_previous %}
+                            <li {% if page_obj.number == 1%} class="page-item active" {% endif %}>
+                            <button ><a class="page-link" href="?page=1" tabindex="-1">&laquo; first </a></button>
+                
+                                <button ><a class="page-link" href="?page={{ page_obj.previous_page_number }}">Previous </a></button>
+                            {% endif%}
+                                {% if page_obj.has_next %}
+                                <button ><a class="page-link" href="?page={{ page_obj.next_page_number }}">Next </a></button>
+                                    <button ><a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a></button>
+                            {% endif %}
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{%endblock%}

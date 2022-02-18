@@ -1,0 +1,35 @@
+{% extends 'home/main.html'%}
+{%load static%}
+{%block content%}
+<head>
+  <link rel="stylesheet" href="{%static "css/profile.css"%}"> 
+</head>
+<body>
+  <div class="container">
+    <form method="post" action="{% url 'addmoney_update' addmoney_info.id %}">
+      {% csrf_token %}  
+      <div class="feedback-input"> 
+      <select name="add_money" id="add_money" class="feedback-input" value="{{addmoney_info.add_money}}">
+ 
+        <option value="Expense">Expense</option>
+        <option value="Income">Income</option>
+    
+      </select>
+
+      <input name= "quantity" type="number" class="feedback-input" value="{{addmoney_info.quantity}}" placeholder=" Amount ">   
+      <input name="Date" type="date" class="feedback-input" placeholder="Date" value="{{addmoney_info.Date}}" >   
+      <select name="Category" id="Category" class="feedback-input" value="{{addmoney_info.Category}}">
+        <option value="Food">Food</option>
+        <option value="Shopping">Shopping</option>
+        <option value="Travel">Travel</option>
+        <option value="Necessity">Necessity</option>
+        <option value="Entertainment">Entertainment</option>
+        <option value="Others">Others</option>
+      </select>
+      <input type="submit" value="SUBMIT"/>
+    </form>
+  </div>    
+  </body>
+
+  
+{% endblock content %}

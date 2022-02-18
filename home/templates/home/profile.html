@@ -1,0 +1,25 @@
+{% extends 'home/main.html'%}
+{%load static%}
+{%block content%}
+<head>
+  <link rel="stylesheet" href="{%static "css/profile.css"%}"> 
+</head>
+<body>
+  <form method="post">
+    {%csrf_token%}
+      <div class="feedback-input">
+        <p>About</p>
+        <p>User Name</p> 
+        <input name="user" type="text" class="feedback-input" value="{{user}}" disabled/>
+        <p>Name</p>
+        <input name="fname" type="text" class="feedback-input" value="{{user.first_name}}" disabled/>
+        <p>Email</p>
+        <input name="email" type="mail" class="feedback-input" value="{{user.email}}" disabled/>
+        
+        <button type="submit" value="Edit"/></a><a href="{%url "profile_edit" user.id%}"> Edit </a></button>
+      </div>
+    </form>
+  </body>
+
+  
+{% endblock content %}

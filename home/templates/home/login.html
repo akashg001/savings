@@ -1,0 +1,122 @@
+
+{%load static %}
+<html lang="en">
+<head>
+  <title> The Savings </title>
+  <link rel="stylesheet" href="{%static "css/loginstyle.css"%}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  
+  <title>The Savings</title>
+  <style>
+    .popup {
+      width: 100%;
+    }
+    .popup .content {
+      max-height: 100%;
+    }
+
+    @media screen and (max-width: 700px){
+      .popup{
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <div id="popup1">
+    {% for message in messages %}
+    <div class="popup">
+      <strong>Message :</strong>
+      <div class="content">
+        {{ message }}
+      </div>
+    </div>
+    {% endfor %} 
+  </div>
+  <input type="checkbox" id="flip">
+  <div class="cover">
+    
+    <div class="front">
+      <img src="{%static "media/registration.png" %}" alt="">
+      <div class="text">
+        <span class="text-1">Every new friend is a <br> new adventure</span>
+        <span class="text-2">Let's get connected</span>
+      </div>
+    </div>
+    <div class="back">
+      <img class="backImg" src="{%static "media/login.png" %}" alt="">
+      <div class="text">
+        <span class="text-1" >Complete miles of journey <br> with one step</span>
+        <span class="text-2">Let's get started</span>
+      </div>
+    </div>
+  </div>
+  <div class="forms">
+      <div class="form-content">
+        <div class="login-form">
+          <div class="title">Login</div>
+          <form action='/handlelogin/' method='post' class="sign-in-form">
+            {% csrf_token %}
+          <div class="input-boxes">
+            <div class="input-box">
+              <i class="fas fa-envelope"></i>
+              <input name="loginuname" type="text" placeholder="Enter user name">
+            </div>
+            <div class="input-box">
+              <i class="fas fa-lock"></i>
+              <input name="loginpassword1" type="password" placeholder="Enter password" >
+            </div>
+            <div class="button input-box">
+              <input type="submit" value="Submit">
+            </div>
+            <div class="text sign-up-text">Not One Of Us? <label for="flip">Signup now</label></div>
+          </div>
+      </form>
+    </div>
+      <div class="signup-form">
+        <div class="title">Signup</div>
+        <form action="/handleSignup/" method='post'>
+          {% csrf_token %}
+          <div class="input-boxes">
+            <div class="input-box">
+              <i class="fas fa-user"></i>
+              <input name="uname" type="text" placeholder="Enter User Name" required />
+            </div>
+            <div class="input-box">
+              <i class="fas fa-user"></i>
+              <input name="fname" type="text" placeholder="Enter your Full Name" required />
+            </div>
+            
+            <div class="input-box">
+              <i class="fas fa-envelope"></i>
+              <input name="email" type="email" aria-describedby="emailHelp" placeholder="Enter email address" required />
+            </div>
+            
+            <div class="input-box">
+              <i class="fas fa-lock"></i>
+              <input id="pass1" name="pass1" type="password" placeholder="Enter password" required />
+            </div>
+            
+            <div class="button input-box">
+              <input type="submit" value="Submit">
+            </div>
+            <div class="text sign-up-text">One Of Us? <label for="flip">Login now</label></div>
+          </div>
+    </form>
+  </div>
+  </div>
+  </div>
+</div>   
+<script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+    <script type="text/javascript"> 
+    $(function(){
+    setTimeout(function(){
+        $("#popup1").hide();
+        }, 1500);
+      });
+    </script>
+    
+</body>
+</html>
