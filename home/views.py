@@ -11,6 +11,9 @@ from django.http import JsonResponse
 import datetime
 from django.utils import timezone
 import csv
+
+import requests
+
 def home(request):
     if request.session.has_key('is_logged'):
         return redirect('/index')

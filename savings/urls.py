@@ -10,7 +10,5 @@ from django.urls import re_path
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('home.urls')),
-    re_path(r'^media/(?p<path>.*)$', serve,{'document_root': settings.MEDIA_ROOT}),
-    re_path(r'^static/(?p<path>.*)$', serve,{'document_root': settings.STATIC_ROOT}),  
 ]
-urlpatterns += static(settings.STATIC_URL,document_root=settings.STATIC_ROOT )
+urlpatterns += staticfiles_urlpatterns()
