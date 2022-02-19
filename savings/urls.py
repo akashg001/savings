@@ -5,8 +5,13 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
+from django.views.static import serve
+from django.config.urls import url
+
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('home.urls'))  
+    path('', include('home.urls')),
+    url(r'^media/(?p<path>.*)$', serve,{'document_root': settings.MEDIA_ROOT}),
+    url(r'^media/(?p<path>.*)$', serve,{'document_root': settings.STATIC_ROOT}),  
 ]
 urlpatterns += staticfiles_urlpatterns()
