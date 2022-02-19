@@ -1,1 +1,3 @@
-web: gunicorn savings.wsgi --log-file-
+web: gunicorn savings.wsgi --log-file -
+python manage.py collectstatic --noinput
+manage.py migrate
