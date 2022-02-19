@@ -6,12 +6,12 @@ from django.conf.urls.static import static
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 from django.views.static import serve
-from django.conf.urls import url
+from django.urls import re_path
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('home.urls')),
-    url(r'^media/(?p<path>.*)$', serve,{'document_root': settings.MEDIA_ROOT}),
-    url(r'^static/(?p<path>.*)$', serve,{'document_root': settings.STATIC_ROOT}),  
+    re_path(r'^media/(?p<path>.*)$', serve,{'document_root': settings.MEDIA_ROOT}),
+    re_path(r'^static/(?p<path>.*)$', serve,{'document_root': settings.STATIC_ROOT}),  
 ]
 urlpatterns +=  [static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT )+static(settings.STATIC_URL,document_root=settings.STATIC_ROOT )
 ]
