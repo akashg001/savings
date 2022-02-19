@@ -14,4 +14,4 @@ urlpatterns = [
     url(r'^media/(?p<path>.*)$', serve,{'document_root': settings.MEDIA_ROOT}),
     url(r'^media/(?p<path>.*)$', serve,{'document_root': settings.STATIC_ROOT}),  
 ]
-urlpatterns += staticfiles_urlpatterns()
+urlpatterns=urlpatterns+static(settings.MEDIA_URL,documet_root=settings.MEDIA_ROOT)
